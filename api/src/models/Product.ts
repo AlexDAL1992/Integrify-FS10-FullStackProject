@@ -26,12 +26,12 @@ const productSchema = new mongoose.Schema({
   sizes: [String],
 })
 
-productSchema.set("toJSON", {
+productSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   },
-});
+})
 
-export default mongoose.model<ProductDocument>('Movie', productSchema)
+export default mongoose.model<ProductDocument>('Products', productSchema)

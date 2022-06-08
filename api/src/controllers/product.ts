@@ -12,7 +12,6 @@ export const createProduct = async (
 ) => {
   try {
     const { name, description, categories, variants, sizes } = req.body
-
     const product = new Product({
       name,
       description,
@@ -20,7 +19,6 @@ export const createProduct = async (
       variants,
       sizes,
     })
-
     await ProductService.createProduct(product)
     res.json(product)
   } catch (error) {
@@ -59,7 +57,7 @@ export const deleteProduct = async (
   next: NextFunction
 ) => {
   try {
-    await ProductService.deleteProduct(req.params.ProductId)
+    await ProductService.deleteProduct(req.params.productId)
     res.status(204).end()
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
