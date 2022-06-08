@@ -2,8 +2,11 @@ import express from 'express'
 // import lusca from 'lusca' will be used later
 import dotenv from 'dotenv'
 import passport from 'passport'
+import jwt from 'jsonwebtoken'
 import cors from 'cors'
+
 import loginWithGoogle from './passport/google'
+import { JWT_SECRET } from './util/secrets'
 
 import productRouter from './routers/product'
 import userRouter from './routers/user'
@@ -19,6 +22,7 @@ app.set('port', process.env.PORT || 3000)
 // Global middleware
 app.use(apiContentType)
 app.use(express.json())
+app.use(cors())
 
 // Use Google passport for login
 app.use(passport.initialize())
@@ -27,7 +31,16 @@ app.post(
   '/google-login',
   passport.authenticate('google-id-token', { session: false }),
   (req, res) => {
-    res.json({ message: 'login done' })
+    const user = req.user as { email: string; role: string }
+    const token = jwt.sign(
+      {
+        email: user.email,
+        role: user.role,
+      },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    )
+    res.json({ message: 'login done', token })
   }
 )
 

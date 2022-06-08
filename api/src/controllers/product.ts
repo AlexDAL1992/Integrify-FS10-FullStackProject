@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 
 import Product from '../models/Product'
 import ProductService from '../services/product'
-import { BadRequestError } from '../helpers/apiError'
+import { BadRequestError, ForbiddenError } from '../helpers/apiError'
+import { Role } from '../models/User'
 
 // POST /products
 export const createProduct = async (
@@ -92,6 +93,13 @@ export const findAllProducts = async (
   next: NextFunction
 ) => {
   try {
+    // verifying user authorization
+    /* const user = req.user as { role: Role }
+    const isAdmin = user.role === 'ADMIN'
+    if (!isAdmin) {
+      throw new ForbiddenError()
+    } */
+
     res.json(await ProductService.findAllProducts())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
