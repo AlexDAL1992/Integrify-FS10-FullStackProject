@@ -16,10 +16,18 @@ const prod = ENVIRONMENT === 'production' // Anything else is treated as 'dev'
 
 export const JWT_SECRET = process.env['JWT_SECRET'] as string
 export const MONGODB_URI = process.env['MONGODB_URI'] as string
+export const GOOGLE_CLIENT_ID = process.env['GOOGLE_CLIENT_ID'] as string
 // Use this instead if you want to use local mongodb
 // export const MONGODB_URI = (
 //   prod ? process.env['MONGODB_URI'] : process.env['MONGODB_URI_LOCAL']
 // ) as string
+
+if (!GOOGLE_CLIENT_ID) {
+  logger.error(
+    'No Google client ID. Set GOOGLE_CLIENT_ID environment variable.'
+  )
+  process.exit(1)
+}
 
 if (!JWT_SECRET) {
   logger.error('No client secret. Set JWT_SECRET environment variable.')

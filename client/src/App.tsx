@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
 import { Button } from "@mui/material";
+
+import Can from "./components/Can";
+import logo from "./logo.svg";
 import "./App.css";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
-  const clientId =
-    "7367156687-ci6cn59gllt698sjpklf2c8v7a6lh4ji.apps.googleusercontent.com";
   const [token, setToken] = useState("");
+  const clientId =
+    (process.env.GOOGLE_CLIENT_ID as string) ||
+    "7367156687-ci6cn59gllt698sjpklf2c8v7a6lh4ji.apps.googleusercontent.com";
 
   const handleSuccess = async (res: any) => {
     const tokenId = res.credential;
@@ -33,9 +36,9 @@ function App() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data)
+      console.log(res.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -43,14 +46,21 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+
         <GoogleOAuthProvider clientId={clientId}>
           <GoogleLogin onSuccess={handleSuccess} />
         </GoogleOAuthProvider>
-        {token !== "" && (
-          <Button variant="contained" onClick={handleGetAllProducts}>
-            GET ALL PRODUCTS
-          </Button>
-        )}
+
+        <Can
+          role="admin"
+          perform="products:get"
+          yes={() => (
+            <Button variant="contained" onClick={handleGetAllProducts}>
+              GET ALL PRODUCTS
+            </Button>
+          )}
+          no={() => <p>PERMISSION DENIED!</p>}
+        />
       </header>
     </div>
   );
