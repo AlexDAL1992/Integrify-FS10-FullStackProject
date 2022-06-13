@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import axios from "axios";
-import { Button } from "@mui/material";
+import Homepage from "./pages/Homepage";
 
 import Can from "./components/Can";
 import logo from "./logo.svg";
+import loginService from './services/login'
 import "./App.css";
 
 function App() {
-  const [token, setToken] = useState("");
+  
+  /* const [token, setToken] = useState("");
+  const [decodedToken, setDecodedToken] = useState<{ [key: string]: any }>({});
+
   const clientId =
     (process.env.GOOGLE_CLIENT_ID as string) ||
     "7367156687-ci6cn59gllt698sjpklf2c8v7a6lh4ji.apps.googleusercontent.com";
 
   const handleSuccess = async (res: any) => {
     const tokenId = res.credential;
-    console.log(tokenId);
     const response = await axios.post(
       "http://localhost:5000/google-login",
       {},
@@ -25,8 +26,10 @@ function App() {
         },
       }
     );
-    console.log(response.data.token);
-    setToken(response.data.token);
+    const token = await response.data.token;
+    setToken(token);
+    const decodedToken = jwt_decode(token) as { [key: string]: any };
+    setDecodedToken(decodedToken);
   };
 
   const handleGetAllProducts = async () => {
@@ -40,10 +43,9 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
-  return (
-    <div className="App">
+  /* <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
@@ -52,7 +54,7 @@ function App() {
         </GoogleOAuthProvider>
 
         <Can
-          role="admin"
+          role={decodedToken.role}
           perform="products:get"
           yes={() => (
             <Button variant="contained" onClick={handleGetAllProducts}>
@@ -62,6 +64,12 @@ function App() {
           no={() => <p>PERMISSION DENIED!</p>}
         />
       </header>
+    </div> */
+
+  return (
+    
+    <div className="App">
+      <Homepage/>
     </div>
   );
 }
