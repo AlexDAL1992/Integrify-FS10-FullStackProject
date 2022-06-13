@@ -25,7 +25,6 @@ const Homepage = () => {
 
   return (
     <div>
-      <span>{role === "admin" ? "Dashboard" : "Homepage"}</span>
       <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin onSuccess={handleLogin} />
       </GoogleOAuthProvider>

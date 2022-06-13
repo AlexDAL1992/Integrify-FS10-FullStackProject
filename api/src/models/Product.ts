@@ -4,6 +4,7 @@ import mongoose, { Document } from 'mongoose'
 export type ProductDocument = Document & {
   name: string
   description: string
+  img: string
   categories: string[]
   variants: string[]
   sizes: string[]
@@ -17,6 +18,11 @@ const productSchema = new mongoose.Schema({
     minlength: 5,
   },
   description: {
+    type: String,
+    required: true,
+    minlength: 10,
+  },
+  img: {
     type: String,
     required: true,
     minlength: 10,

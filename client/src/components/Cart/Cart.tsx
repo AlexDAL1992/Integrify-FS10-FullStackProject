@@ -1,11 +1,56 @@
-import React from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Menu, Fade } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 
-import './cart.scss'
+import { Product } from "../../redux/reducers/product";
+import { removeFromCart } from "../../redux/reducers/cart";
+import "./cart.scss";
 
-const Cart = () => {
-    return (<div>
+type CartProps = {
+  cart: Product[];
+  onClick: Function;
+  open: boolean;
+  anchorElement: null | HTMLElement;
+};
 
-    </div>)
-}
+const Cart = ({ cart, onClick, open, anchorElement }: CartProps) => {
+  const dispatch = useDispatch();
+  return (
+    <div>
+      <Menu
+        className="cart__menu"
+        id="fade-menu"
+        anchorEl={anchorElement}
+        keepMounted
+        open={open}
+        onClose={() => onClick()}
+        TransitionComponent={Fade}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <div>
+          <h3>Cart List</h3>
+          {cart.length === 0 && (
+            <div>
+              <h3>Cart is empty</h3>
+            </div>
+          )}
+          {cart &&
+            cart.map((product) => (
+              <div key={product.id}>
+                <img src={product.img} alt={product.name} />
+                <h3>{product.name}</h3>
+                <Delete
+                  onClick={() => dispatch(removeFromCart(product))}
+                />
+              </div>
+            ))}
+        </div>
+      </Menu>
+    </div>
+  );
+};
 
-export default Cart
+export default Cart;

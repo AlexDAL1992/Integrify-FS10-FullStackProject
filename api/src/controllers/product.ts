@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express'
 import Product from '../models/Product'
 import ProductService from '../services/product'
 import { BadRequestError, ForbiddenError } from '../helpers/apiError'
-import { Role } from '../models/User'
 
 // POST /products
 export const createProduct = async (
@@ -12,10 +11,11 @@ export const createProduct = async (
   next: NextFunction
 ) => {
   try {
-    const { name, description, categories, variants, sizes } = req.body
+    const { name, description, img, categories, variants, sizes } = req.body
     const product = new Product({
       name,
       description,
+      img,
       categories,
       variants,
       sizes,

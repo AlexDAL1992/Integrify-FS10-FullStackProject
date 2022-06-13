@@ -4,6 +4,7 @@ import productService from "../../services/product";
 export type Product = {
   id: string;
   name: string;
+  img: string;
   description: string;
   categories: string[];
   variants: string[];
@@ -19,13 +20,15 @@ const productReducer = createSlice({
     setProducts(state, action) {
       return action.payload;
     },
-    updateAProduct(state, action){
-      return state.map(product => product.id !== action.payload.id ? product : action.payload)
+    updateAProduct(state, action) {
+      return state.map((product) =>
+        product.id !== action.payload.id ? product : action.payload
+      );
     },
-    deleteAProduct(state, action){
-      return state.filter(product => product.id !== action.payload)
+    deleteAProduct(state, action) {
+      return state.filter((product) => product.id !== action.payload);
     },
-    createAProduct(state, action){
+    createAProduct(state, action) {
       state.push(action.payload);
     },
   },
@@ -41,23 +44,24 @@ export const setAllProducts = (token: string) => {
 export const createProduct = (product: Product) => {
   return async (dispatch: any) => {
     const createNew = await productService.createNewProduct(product);
-    dispatch(createAProduct(createNew))
-  }
-}
+    dispatch(createAProduct(createNew));
+  };
+};
 
 export const editProduct = (productId: string, product: Product) => {
   return async (dispatch: any) => {
-    const editedProduct = await productService.editAProduct(productId, product)
-    dispatch(updateAProduct(editedProduct))
-  }
-}
+    const editedProduct = await productService.editAProduct(productId, product);
+    dispatch(updateAProduct(editedProduct));
+  };
+};
 
 export const deleteProduct = (productId: string) => {
   return async (dispatch: any) => {
-    await productService.deleteAProduct(productId)
-    dispatch(deleteAProduct(productId))
-  }
-}
+    await productService.deleteAProduct(productId);
+    dispatch(deleteAProduct(productId));
+  };
+};
 
-export const { setProducts, updateAProduct, deleteAProduct, createAProduct } = productReducer.actions;
+export const { setProducts, updateAProduct, deleteAProduct, createAProduct } =
+  productReducer.actions;
 export default productReducer.reducer;
