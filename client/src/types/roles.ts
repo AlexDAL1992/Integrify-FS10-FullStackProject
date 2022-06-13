@@ -1,6 +1,6 @@
 export const RBAC_RULES = {
   admin: {
-    view: ["homepage", "dashboard"],
+    view: ["dashboard"],
     actions: [
       "products:get",
       "product:post",

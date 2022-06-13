@@ -1,20 +1,18 @@
 import React from "react";
-import axios from "axios";
-import jwt_decode from "jwt-decode";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
-import Can from "../components/Can";
-import loginService from "../services/login";
-import { setUser } from "../redux/reducers/user";
-import {setAllProducts} from '../redux/reducers/product'
+import Can from "../../components/Can";
+import { handleLoginSuccess } from "../../redux/reducers/user";
+import { setAllProducts } from "../../redux/reducers/product";
+import { clientId } from "../../services/login";
+import './homepage.scss'
 
 const Homepage = () => {
   const dispatch = useDispatch();
   const role = useSelector((state: any) => state.user.user.role);
   const token = useSelector((state: any) => state.user.token);
-  const product = useSelector((state: any) => state.product);
 
   const getProducts = async (event: any) => {
     event.preventDefault();
@@ -22,24 +20,13 @@ const Homepage = () => {
   };
 
   const handleLogin = async (res: any) => {
-    const tokenId = res.credential;
-    const response = await axios.post(
-      "http://localhost:5000/google-login",
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${tokenId}`,
-        },
-      }
-    );
-    const token = await response.data.token;
-    const decodedToken = jwt_decode(token) as { [key: string]: any };
-    dispatch(setUser({ token, user: decodedToken }));
+    dispatch(handleLoginSuccess(res)as any);
   };
 
   return (
     <div>
-      <GoogleOAuthProvider clientId={loginService.clientId}>
+      <span>{role === "admin" ? "Dashboard" : "Homepage"}</span>
+      <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin onSuccess={handleLogin} />
       </GoogleOAuthProvider>
 

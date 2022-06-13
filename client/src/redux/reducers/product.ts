@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import productService from "../../services/product";
 
-type Product = {
+export type Product = {
   id: string;
   name: string;
   description: string;
@@ -19,6 +19,15 @@ const productReducer = createSlice({
     setProducts(state, action) {
       return action.payload;
     },
+    updateAProduct(state, action){
+      return state.map(product => product.id !== action.payload.id ? product : action.payload)
+    },
+    deleteAProduct(state, action){
+      return state.filter(product => product.id !== action.payload)
+    },
+    createAProduct(state, action){
+      state.push(action.payload);
+    },
   },
 });
 
@@ -29,5 +38,26 @@ export const setAllProducts = (token: string) => {
   };
 };
 
-export const { setProducts } = productReducer.actions;
+export const createProduct = (product: Product) => {
+  return async (dispatch: any) => {
+    const createNew = await productService.createNewProduct(product);
+    dispatch(createAProduct(createNew))
+  }
+}
+
+export const editProduct = (productId: string, product: Product) => {
+  return async (dispatch: any) => {
+    const editedProduct = await productService.editAProduct(productId, product)
+    dispatch(updateAProduct(editedProduct))
+  }
+}
+
+export const deleteProduct = (productId: string) => {
+  return async (dispatch: any) => {
+    await productService.deleteAProduct(productId)
+    dispatch(deleteAProduct(productId))
+  }
+}
+
+export const { setProducts, updateAProduct, deleteAProduct, createAProduct } = productReducer.actions;
 export default productReducer.reducer;

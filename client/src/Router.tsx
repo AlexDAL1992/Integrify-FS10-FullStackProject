@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-import Homepage from "./pages/Homepage";
-import User from "./pages/User";
-import Product from "./pages/Product";
+import Homepage from "./pages/Homepage/Homepage";
+import User from "./pages/User/User";
+import Product from "./pages/Product/Product";
 
 const Router = () => {
   return (

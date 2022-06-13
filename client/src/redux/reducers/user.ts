@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import handleLoginSuccess from '../../services/login'
+import { handleLogin } from "../../services/login";
 
 type User = {
   token: string;
@@ -21,5 +21,12 @@ const userReducer = createSlice({
   },
 });
 
+export const handleLoginSuccess = (res: any) => {
+  return async (dispatch: any) => {
+    const user = await handleLogin(res);
+    dispatch(setUser(user))
+  };
+};
+
 export const { setUser } = userReducer.actions;
-export default userReducer.reducer
+export default userReducer.reducer;

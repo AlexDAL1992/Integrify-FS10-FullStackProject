@@ -93,13 +93,6 @@ export const findAllProducts = async (
   next: NextFunction
 ) => {
   try {
-    // verifying user authorization
-    /* const user = req.user as { role: Role }
-    const isAdmin = user.role === 'ADMIN'
-    if (!isAdmin) {
-      throw new ForbiddenError()
-    } */
-
     res.json(await ProductService.findAllProducts())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {

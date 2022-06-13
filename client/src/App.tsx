@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import Homepage from "./pages/Homepage";
+import Router from "./Router";
 
 import "./App.css";
+import AppBar from "./components/AppBar/AppBar";
 
 function App() {
+  const [drawerState, setDrawerState] = useState(false);
+  const handleDrawerState = (state: boolean) => {
+    setDrawerState(state);
+  };
 
   return (
-    
     <div className="App">
-      <Homepage/>
+      <AppBar drawerState={drawerState} onClick={handleDrawerState} />
+      <Router />
     </div>
   );
 }
