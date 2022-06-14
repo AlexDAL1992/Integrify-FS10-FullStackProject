@@ -1,0 +1,35 @@
+@import '../../styles/base';
+
+.product-card {
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        margin: 2rem 10rem;
+        background-color: $lightGray;
+    }
+
+    &__left {
+        margin: 2rem;
+        max-width: 15rem;
+        cursor: pointer;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        margin: 2rem;
+        align-self: center;
+    }
+
+    &__name {
+        text-align: left;
+        font-size: 2rem;
+        margin: 0.5rem;
+        cursor: pointer;
+    }
+
+    &__description {
+        text-align: left;
+        margin: 1.5rem 0.5rem;
+    }
+}

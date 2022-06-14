@@ -15,8 +15,8 @@ const ProductList = () => {
   }, [dispatch, token]);
 
   return (
-    <div>
-      <div>Product List</div>
+    <div className="product-list">
+      <div className="product-list__title">PRODUCT LIST</div>
       {productList &&
         productList.map((product: any) => (
           <ProductCard key={product.id} product={product} />

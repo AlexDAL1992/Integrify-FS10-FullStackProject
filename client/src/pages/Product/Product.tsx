@@ -19,7 +19,7 @@ const Product = () => {
   const product = products.find((p: any) => p.id === id);
 
   return (
-    <div>
+    <div className="product-page">
       {!product && (
         <div>
           <h2>Product is not found!</h2>
@@ -27,27 +27,29 @@ const Product = () => {
       )}
 
       {product && (
-        <div>
+        <div className="product-page__detail">
           <img src={product.img} alt={product.name} />
           <h2>{product.name}</h2>
           <h3>Description: {product.description}</h3>
-          <h3>Categories: {product.categories.join(', ')}</h3>
-          <h3>Variants: {product.variants.join(', ')}</h3>
-          <h3>Sizes: {product.sizes.join(', ')}</h3>
+          <h3>Categories: {product.categories.join(", ")}</h3>
+          <h3>Variants: {product.variants.join(", ")}</h3>
+          <h3>Sizes: {product.sizes.join(", ")}</h3>
           <Button
             onClick={() => dispatch(addToCart(product))}
             disabled={cart.includes(product)}
           >
             ADD TO CART
           </Button>
-          
-                <Can
+
+          <Can
             role={role}
             perform="product:edit"
             yes={() => (
               <div>
                 <Button
-                  onClick={() => {navigate(`/form/products/${product.id}`)}}
+                  onClick={() => {
+                    navigate(`/form/products/${product.id}`);
+                  }}
                 >
                   UPDATE THIS PRODUCT
                 </Button>
@@ -55,6 +57,7 @@ const Product = () => {
             )}
             no={() => <div></div>}
           />
+          
           <Can
             role={role}
             perform="product:delete"

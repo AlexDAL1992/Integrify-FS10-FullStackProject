@@ -1,0 +1,10 @@
+@import '../../styles/base';
+
+.product-list {
+    margin: 5rem auto;
+
+    &__title{
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+}

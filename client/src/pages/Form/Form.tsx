@@ -77,12 +77,12 @@ const Form = () => {
   };
 
   return (
-    <div>
+    <div className="form-page">
       <Can
         role={role}
         perform="product:post"
         yes={() => (
-          <div>
+          <div className="form-page__form">
             {id ? <h3>UPDATE THIS PRODUCT</h3> : <h3>CREATE NEW PRODUCT</h3>}
             <form onSubmit={id ? handleUpdate : handleSubmit}>
               <Grid

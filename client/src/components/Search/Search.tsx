@@ -12,13 +12,15 @@ const Search = () => {
     dispatch(setSearchKeyword(target.value));
   };
   return (
-    <div>
+    <div className="search-bar">
+      <div className="search-bar__wrapper">
       <Input
         onChange={handleInput}
         placeholder="Type to search ..."
         disableUnderline
       />
       <SearchIcon />
+      </div>
     </div>
   );
 };

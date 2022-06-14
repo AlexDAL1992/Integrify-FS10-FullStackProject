@@ -1,0 +1,12 @@
+@import "../../styles/base";
+
+.form-page {
+  margin: 2rem auto;
+
+  &__form {
+    h3 {
+      font-size: 2rem;
+      margin: 2rem auto;
+    }
+  }
+}

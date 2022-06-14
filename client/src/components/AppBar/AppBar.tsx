@@ -38,40 +38,42 @@ const AppBar = ({ drawerState, onClick }: AppBarProps) => {
   };
 
   return (
-    <div>
-      <div>
-        <Menu onClick={onDrawerClick} />
-      </div>
-      <div>
-        <Link to={"/"}>{role === "admin" ? "DASHBOARD" : "HOMEPAGE"}</Link>
-      </div>
-      {role === "admin" && (
-        <div>
-          <Link to={"/form"}>FORM</Link>
+    <div className="appbar">
+      <div className="appbar__content container">
+        <div className="appbar__content-theme">
+          <Menu onClick={onDrawerClick} />
         </div>
-      )}
-      {role === "admin" && (
         <div>
-          <Link to={"/user"}>USERS</Link>
+          <Link to={"/"}>{role === "admin" ? "DASHBOARD" : "HOMEPAGE"}</Link>
         </div>
-      )}
-      <div>
-        <Search />
-      </div>
-      <button onClick={handleClick}>
-        <ShoppingCart />
-        <div>{cart && cart.length}</div>
-      </button>
-      <Cart
-        cart={cart}
-        open={open}
-        anchorElement={anchorEl}
-        onClick={handleClose}
-      />
-      <div>
-        <GoogleOAuthProvider clientId={clientId}>
-          <GoogleLogin onSuccess={handleLogin} />
-        </GoogleOAuthProvider>
+        {role === "admin" && (
+          <div>
+            <Link to={"/form"}>FORM</Link>
+          </div>
+        )}
+        {role === "admin" && (
+          <div>
+            <Link to={"/user"}>USERS</Link>
+          </div>
+        )}
+        <div>
+          <Search />
+        </div>
+        <button className="appbar__content-cart" onClick={handleClick}>
+          <ShoppingCart />
+          <div className="appbar__content-cart-count">{cart && cart.length}</div>
+        </button>
+        <Cart
+          cart={cart}
+          open={open}
+          anchorElement={anchorEl}
+          onClick={handleClose}
+        />
+        <div>
+          <GoogleOAuthProvider clientId={clientId}>
+            <GoogleLogin onSuccess={handleLogin} />
+          </GoogleOAuthProvider>
+        </div>
       </div>
     </div>
   );

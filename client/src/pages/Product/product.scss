@@ -1,0 +1,24 @@
+@import "../../styles/base";
+
+.product-page {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  
+  &__detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 20rem;
+    }
+    h2 {
+      margin: 2rem 0;
+    }
+    h3 {
+      margin: 0.5rem 0;
+    }
+  }
+}

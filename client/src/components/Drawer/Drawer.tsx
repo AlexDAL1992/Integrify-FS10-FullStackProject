@@ -14,21 +14,23 @@ const Drawer = ({ state, onClick }: DrawerProps) => {
     onClick(!state);
   };
   return (
-    <div>
-      <DrawerButton anchor="left" open={state}>
-        <div>
-          <Close onClick={onDrawerClick} />
-          <h3>THEMES</h3>
-        </div>
-        <div>
-          <ul>
-            <li>
-              <Button>Light</Button>
-            </li>
-            <li>
-              <Button>Dark</Button>
-            </li>
-          </ul>
+    <div className="themedrawer">
+      <DrawerButton anchor="left" open={state} className="themedrawer__drawer">
+        <div className="themedrawer__drawer-content">
+          <div className="themedrawer__drawer-title">
+            <Close onClick={onDrawerClick} />
+            <h3>THEMES</h3>
+          </div>
+          <div className="themedrawer__drawer-menu">
+            <ul>
+              <li>
+                <Button>Light</Button>
+              </li>
+              <li>
+                <Button>Dark</Button>
+              </li>
+            </ul>
+          </div>
         </div>
       </DrawerButton>
     </div>
