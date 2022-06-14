@@ -16,7 +16,7 @@ const Search = () => {
       <div className="search-bar__wrapper">
       <Input
         onChange={handleInput}
-        placeholder="Type to search ..."
+        placeholder="Search by name ..."
         disableUnderline
       />
       <SearchIcon />

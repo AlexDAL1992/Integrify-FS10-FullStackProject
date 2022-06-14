@@ -1,0 +1,28 @@
+@import "../../styles/base";
+
+.userlist-page {
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__list {
+    margin: 0.5rem 5rem;
+  }
+
+  &__line {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    padding: 2rem 2rem 1rem 2rem;
+    background-color: $lightGray;
+    h4 {
+        text-align: left;
+    }
+  }
+}
