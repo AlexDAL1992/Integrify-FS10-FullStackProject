@@ -1,4 +1,4 @@
-@import '../../styles/base';
+@import "../../styles/base";
 
 .appbar {
   height: 80px;
@@ -15,10 +15,12 @@
   &__content-title {
     display: flex;
     align-items: center;
-    
-        font-size: 1.5rem;
-        color: $lightBlack;
-    
+    font-size: 1.5rem;
+    :link,
+    :visited {
+      color: $lightBlack;
+    }
+    text-decoration: none;
   }
   &__content-cart {
     border: none;

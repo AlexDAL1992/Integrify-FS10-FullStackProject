@@ -4,6 +4,7 @@ import productReducer from "./reducers/product";
 import searchReducer from "./reducers/search";
 import cartReducer from "./reducers/cart";
 import userListReducer from "./reducers/user-list";
+import themeReducer from "./reducers/theme";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     product: productReducer,
     search: searchReducer,
     userList: userListReducer,
+    theme: themeReducer
   },
 });
 

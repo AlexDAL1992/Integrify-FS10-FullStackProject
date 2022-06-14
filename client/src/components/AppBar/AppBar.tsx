@@ -43,16 +43,16 @@ const AppBar = ({ drawerState, onClick }: AppBarProps) => {
         <div className="appbar__content-theme">
           <Menu onClick={onDrawerClick} />
         </div>
-        <div>
+        <div className="appbar__content-title">
           <Link to={"/"}>{role === "admin" ? "DASHBOARD" : "HOMEPAGE"}</Link>
         </div>
         {role === "admin" && (
-          <div>
+          <div className="appbar__content-title">
             <Link to={"/form"}>FORM</Link>
           </div>
         )}
         {role === "admin" && (
-          <div>
+          <div className="appbar__content-title">
             <Link to={"/user"}>USERS</Link>
           </div>
         )}
