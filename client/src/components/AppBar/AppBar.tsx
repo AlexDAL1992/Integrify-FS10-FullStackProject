@@ -1,9 +1,13 @@
 import React, { useState, MouseEvent } from "react";
-import { useSelector } from "react-redux";
-import { ShoppingCart, Menu } from '@mui/icons-material'
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { ShoppingCart, Menu } from "@mui/icons-material";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
+import { clientId } from "../../services/login";
+import { handleLoginSuccess } from "../../redux/reducers/user";
 import Cart from "../Cart/Cart";
-import Search from '../Search/Search'
+import Search from "../Search/Search";
 import "./AppBar.scss";
 
 interface AppBarProps {
@@ -12,12 +16,13 @@ interface AppBarProps {
 }
 
 const AppBar = ({ drawerState, onClick }: AppBarProps) => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state: any) => state.cart);
+  const role = useSelector((state: any) => state.user.user.role);
+
   const onDrawerClick = () => {
     onClick(!drawerState);
   };
-
-  const cart = useSelector((state: any) => state.cart);
-  const role = useSelector((state: any) => state.user.user.role)
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -28,28 +33,48 @@ const AppBar = ({ drawerState, onClick }: AppBarProps) => {
     setAnchorEl(null);
   };
 
-  return <div>
+  const handleLogin = async (res: any) => {
+    dispatch(handleLoginSuccess(res) as any);
+  };
+
+  return (
+    <div>
       <div>
-      <Menu onClick={onDrawerClick} />
+        <Menu onClick={onDrawerClick} />
       </div>
       <div>
-          {role === 'admin' ? 'Dashboard' : 'Homepage'}
+        <Link to={"/"}>{role === "admin" ? "DASHBOARD" : "HOMEPAGE"}</Link>
       </div>
-      <div><Search /></div>
+      {role === "admin" && (
+        <div>
+          <Link to={"/form"}>FORM</Link>
+        </div>
+      )}
+      {role === "admin" && (
+        <div>
+          <Link to={"/user"}>USERS</Link>
+        </div>
+      )}
+      <div>
+        <Search />
+      </div>
       <button onClick={handleClick}>
         <ShoppingCart />
-        <div>
-            {cart && cart.length}
-        </div>
+        <div>{cart && cart.length}</div>
       </button>
       <Cart
-          cart={cart}
-          open={open}
-          anchorElement={anchorEl}
-          onClick={handleClose}
-        />
-
-  </div>;
+        cart={cart}
+        open={open}
+        anchorElement={anchorEl}
+        onClick={handleClose}
+      />
+      <div>
+        <GoogleOAuthProvider clientId={clientId}>
+          <GoogleLogin onSuccess={handleLogin} />
+        </GoogleOAuthProvider>
+      </div>
+    </div>
+  );
 };
 
 export default AppBar;

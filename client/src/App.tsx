@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import Router from "./Router";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import Router from "./Router";
 import Drawer from "./components/Drawer/Drawer";
 import AppBar from "./components/AppBar/AppBar";
+import { setAllProducts } from "./redux/reducers/product";
 import "./App.css";
 
 function App() {

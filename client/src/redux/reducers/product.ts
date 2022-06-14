@@ -41,7 +41,7 @@ export const setAllProducts = (token: string) => {
   };
 };
 
-export const createProduct = (product: Product) => {
+export const createProduct = (product: any) => {
   return async (dispatch: any) => {
     const createNew = await productService.createNewProduct(product);
     dispatch(createAProduct(createNew));
