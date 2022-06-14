@@ -31,15 +31,30 @@ const Product = () => {
           <img src={product.img} alt={product.name} />
           <h2>{product.name}</h2>
           <h3>Description: {product.description}</h3>
-          <h3>Categories: {product.categories.toString()}</h3>
-          <h3>Variants: {product.variants.toString()}</h3>
-          <h3>Sizes: {product.sizes.toString()}</h3>
+          <h3>Categories: {product.categories.join(', ')}</h3>
+          <h3>Variants: {product.variants.join(', ')}</h3>
+          <h3>Sizes: {product.sizes.join(', ')}</h3>
           <Button
             onClick={() => dispatch(addToCart(product))}
             disabled={cart.includes(product)}
           >
             ADD TO CART
           </Button>
+          
+                <Can
+            role={role}
+            perform="product:edit"
+            yes={() => (
+              <div>
+                <Button
+                  onClick={() => {navigate(`/form/products/${product.id}`)}}
+                >
+                  UPDATE THIS PRODUCT
+                </Button>
+              </div>
+            )}
+            no={() => <div></div>}
+          />
           <Can
             role={role}
             perform="product:delete"

@@ -48,7 +48,7 @@ export const createProduct = (product: any) => {
   };
 };
 
-export const editProduct = (productId: string, product: Product) => {
+export const editProduct = (productId: string, product: any) => {
   return async (dispatch: any) => {
     const editedProduct = await productService.editAProduct(productId, product);
     dispatch(updateAProduct(editedProduct));

@@ -28,18 +28,6 @@ const ProductCard = ({ product }: any) => {
           ADD TO CART
         </Button>
       </div>
-      <Can
-        role={role}
-        perform="product:delete"
-        yes={() => (
-          <div>
-            <Button onClick={() => dispatch(deleteProduct(product.id) as any)}>
-              DELETE THIS PRODUCT
-            </Button>
-          </div>
-        )}
-        no={() => <div></div>}
-      />
     </div>
   );
 };

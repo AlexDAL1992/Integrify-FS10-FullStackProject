@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Grid, TextField } from "@mui/material";
-import { createProduct, Product } from "../../redux/reducers/product";
+import { createProduct, editProduct } from "../../redux/reducers/product";
 
 import Can from "../../components/Can";
 import "./form.scss";
@@ -11,6 +11,13 @@ const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const role = useSelector((state: any) => state.user.user.role);
+  const products = useSelector((state: any) => state.product);
+
+  const { id } = useParams<{ id: string }>();
+  let product;
+  if (id) {
+    product = products.find((p: any) => p.id === id);
+  }
 
   const defaultFormValues = {
     name: "",
@@ -19,7 +26,16 @@ const Form = () => {
     variants: "",
     sizes: "",
   };
-  const [formValues, setFormValues] = useState(defaultFormValues);
+
+  const initialFormValues = id ? {
+    name: product.name,
+    description: product.description,
+    categories: product.categories[1],
+    variants: product.variants[1],
+    sizes: product.sizes[1],
+  } : defaultFormValues;
+
+  const [formValues, setFormValues] = useState(id ? initialFormValues : defaultFormValues);
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -45,6 +61,21 @@ const Form = () => {
     setFormValues(defaultFormValues);
   };
 
+  const handleUpdate = (event: any) => {
+    event.preventDefault();
+
+    const updatedProduct = {
+      name: formValues.name,
+      img: "https://i.ibb.co/zhwj93Z/blank.png",
+      description: formValues.description,
+      categories: ["All", formValues.categories],
+      variants: ["All", formValues.variants],
+      sizes: ["All", formValues.sizes],
+    };
+    dispatch(editProduct(id as string, updatedProduct) as any);
+    setFormValues(defaultFormValues);
+  };
+
   return (
     <div>
       <Can
@@ -52,8 +83,8 @@ const Form = () => {
         perform="product:post"
         yes={() => (
           <div>
-            <h3>CREATE NEW PRODUCT</h3>
-            <form onSubmit={handleSubmit}>
+            {id ? <h3>UPDATE THIS PRODUCT</h3> : <h3>CREATE NEW PRODUCT</h3>}
+            <form onSubmit={id ? handleUpdate : handleSubmit}>
               <Grid
                 container
                 alignItems="center"
@@ -106,7 +137,7 @@ const Form = () => {
                   />
                 </Grid>
               </Grid>
-              <Button type="submit">CREATE</Button>
+              <Button type="submit">{id ? "UPDATE" : "CREATE"}</Button>
             </form>
           </div>
         )}
