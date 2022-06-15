@@ -27,7 +27,7 @@ const ProductList = () => {
   }, [keyword, productList]);
 
   return (
-    <div className="product-list">
+    <div className="product-list background text">
       <div className="product-list__title">PRODUCT LIST</div>
       {productList &&
         filteredProducts.map((product: any) => (

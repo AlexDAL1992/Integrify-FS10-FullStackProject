@@ -2,23 +2,24 @@
 
 .appbar {
   height: 80px;
-  margin: 2rem;
+  padding: 2rem;
   &__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     svg.MuiSvgIcon-root {
       font-size: 2rem;
-      color: $lightBlack;
     }
+    
   }
   &__content-title {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
+
     :link,
     :visited {
-      color: $lightBlack;
+      text-decoration: none;
     }
     text-decoration: none;
   }

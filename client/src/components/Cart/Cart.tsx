@@ -17,7 +17,7 @@ type CartProps = {
 const Cart = ({ cart, onClick, open, anchorElement }: CartProps) => {
   const dispatch = useDispatch();
   return (
-    <div className="cart">
+    <div className="cart background text">
       <Menu
         className="cart__menu"
         id="fade-menu"
@@ -42,7 +42,8 @@ const Cart = ({ cart, onClick, open, anchorElement }: CartProps) => {
               <div key={product.id} className="cart__item">
                 <img src={product.img} alt={product.name} />
                 <h3>{product.name}</h3>
-                <Delete className="cart__delete"
+                <Delete
+                  className="cart__delete"
                   onClick={() => dispatch(removeFromCart(product))}
                 />
               </div>

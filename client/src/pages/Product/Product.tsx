@@ -19,7 +19,7 @@ const Product = () => {
   const product = products.find((p: any) => p.id === id);
 
   return (
-    <div className="product-page">
+    <div className="product-page background text">
       {!product && (
         <div>
           <h2>Product is not found!</h2>
@@ -35,6 +35,8 @@ const Product = () => {
           <h3>Variants: {product.variants.join(", ")}</h3>
           <h3>Sizes: {product.sizes.join(", ")}</h3>
           <Button
+            variant="outlined"
+            color="inherit"
             onClick={() => dispatch(addToCart(product))}
             disabled={cart.includes(product)}
           >
@@ -47,6 +49,8 @@ const Product = () => {
             yes={() => (
               <div>
                 <Button
+                  variant="outlined"
+                  color="inherit"
                   onClick={() => {
                     navigate(`/form/products/${product.id}`);
                   }}
@@ -57,13 +61,15 @@ const Product = () => {
             )}
             no={() => <div></div>}
           />
-          
+
           <Can
             role={role}
             perform="product:delete"
             yes={() => (
               <div>
                 <Button
+                  variant="outlined"
+                  color="inherit"
                   onClick={() => dispatch(deleteProduct(product.id) as any)}
                 >
                   DELETE THIS PRODUCT
@@ -75,6 +81,8 @@ const Product = () => {
         </div>
       )}
       <Button
+        variant="outlined"
+        color="inherit"
         onClick={() => {
           navigate("/");
         }}

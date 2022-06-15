@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ShoppingCart, Menu } from "@mui/icons-material";
@@ -8,6 +8,7 @@ import { clientId } from "../../services/login";
 import { handleLoginSuccess } from "../../redux/reducers/user";
 import Cart from "../Cart/Cart";
 import Search from "../Search/Search";
+import { ThemeContext } from "../Context/ThemeContext";
 import "./AppBar.scss";
 
 interface AppBarProps {
@@ -38,30 +39,38 @@ const AppBar = ({ drawerState, onClick }: AppBarProps) => {
   };
 
   return (
-    <div className="appbar">
-      <div className="appbar__content container">
+    <div className={"appbar text background"}>
+      <div className="appbar__content">
         <div className="appbar__content-theme">
           <Menu onClick={onDrawerClick} />
         </div>
         <div className="appbar__content-title">
-          <Link to={"/"}>{role === "admin" ? "DASHBOARD" : "HOMEPAGE"}</Link>
+          <Link to={"/"} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+            {role === "admin" ? "DASHBOARD" : "HOMEPAGE"}
+          </Link>
         </div>
         {role === "admin" && (
           <div className="appbar__content-title">
-            <Link to={"/form"}>FORM</Link>
+            <Link to={"/form"} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+              FORM
+            </Link>
           </div>
         )}
         {role === "admin" && (
           <div className="appbar__content-title">
-            <Link to={"/user"}>USERS</Link>
+            <Link to={"/user"} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+              USERS
+            </Link>
           </div>
         )}
         <div>
           <Search />
         </div>
         <button className="appbar__content-cart" onClick={handleClick}>
-          <ShoppingCart />
-          <div className="appbar__content-cart-count">{cart && cart.length}</div>
+          <ShoppingCart className='text' />
+          <div className="appbar__content-cart-count">
+            {cart && cart.length}
+          </div>
         </button>
         <Cart
           cart={cart}

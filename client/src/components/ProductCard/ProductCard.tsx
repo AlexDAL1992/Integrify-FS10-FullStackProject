@@ -13,16 +13,18 @@ const ProductCard = ({ product }: any) => {
   const cart = useSelector((state: any) => state.cart);
 
   return (
-    <div className="product-card">
+    <div className="product-card background text">
       <div className="product-card__wrapper">
-        <img className="product-card__left"
+        <img
+          className="product-card__left"
           src={product.img}
           onClick={() => {
             navigate(`/products/${product.id}`);
           }}
         />
         <div className="product-card__right">
-          <h3 className="product-card__name"
+          <h3
+            className="product-card__name"
             onClick={() => {
               navigate(`/products/${product.id}`);
             }}
@@ -33,6 +35,9 @@ const ProductCard = ({ product }: any) => {
           <p className="product-card__description">{product.description}</p>
 
           <Button
+            color="inherit"
+            variant="outlined"
+            className="product-card__button"
             disabled={cart.includes(product)}
             onClick={() => dispatch(addToCart(product) as any)}
           >

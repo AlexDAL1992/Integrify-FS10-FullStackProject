@@ -1,7 +1,8 @@
 @import "../../styles/base";
 
 .userlist-page {
-  margin: 5rem auto;
+  margin: auto;
+  padding: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +21,7 @@
     flex-direction: column;
     margin: 1rem auto;
     padding: 2rem 2rem 1rem 2rem;
-    background-color: $lightGray;
+    background-color: #ADB5BD;
     h4 {
         text-align: left;
     }

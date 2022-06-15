@@ -13,13 +13,13 @@ const User = () => {
 
   const role = useSelector((state: any) => state.user.user.role);
   const userList = useSelector((state: any) => state.userList);
-  
+
   useEffect(() => {
     dispatch(getAllUsers() as any);
   }, [dispatch, userList]);
 
   return (
-    <div className="userlist-page">
+    <div className="userlist-page background text">
       <Can
         role={role}
         perform="user:findAll"
@@ -35,6 +35,8 @@ const User = () => {
                     <h4>Email: {user.email}</h4>
                     <h4>Role: {user.role}</h4>
                     <Button
+                      variant="outlined"
+                      color="inherit"
                       onClick={() => dispatch(deleteAUser(user.id) as any)}
                     >
                       DELETE THIS USER
@@ -53,6 +55,8 @@ const User = () => {
       />
 
       <Button
+        variant="outlined"
+        color="inherit"
         onClick={() => {
           navigate("/");
         }}

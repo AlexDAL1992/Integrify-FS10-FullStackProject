@@ -5,7 +5,7 @@
         display: flex;
         flex-direction: row;
         margin: 2rem 10rem;
-        background-color: $lightGray;
+        background-color: #ADB5BD;
     }
 
     &__left {
@@ -15,8 +15,6 @@
     }
 
     &__right {
-        display: flex;
-        flex-direction: column;
         margin: 2rem;
         align-self: center;
     }
@@ -31,5 +29,9 @@
     &__description {
         text-align: left;
         margin: 1.5rem 0.5rem;
+    }
+
+    &__button{
+        justify-self: left;
     }
 }

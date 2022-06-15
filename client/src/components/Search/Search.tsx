@@ -14,12 +14,12 @@ const Search = () => {
   return (
     <div className="search-bar">
       <div className="search-bar__wrapper">
-      <Input
-        onChange={handleInput}
-        placeholder="Search by name ..."
-        disableUnderline
-      />
-      <SearchIcon />
+        <Input
+          onChange={handleInput}
+          placeholder="Search by name ..."
+          disableUnderline
+        />
+        <SearchIcon />
       </div>
     </div>
   );

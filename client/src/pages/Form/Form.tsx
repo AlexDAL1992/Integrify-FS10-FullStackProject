@@ -77,7 +77,7 @@ const Form = () => {
   };
 
   return (
-    <div className="form-page">
+    <div className="form-page text background">
       <Can
         role={role}
         perform="product:post"
@@ -85,14 +85,14 @@ const Form = () => {
           <div className="form-page__form">
             {id ? <h3>UPDATE THIS PRODUCT</h3> : <h3>CREATE NEW PRODUCT</h3>}
             <form onSubmit={id ? handleUpdate : handleSubmit}>
-              <Grid
+              <Grid className='form-page__form-grid'
                 container
                 alignItems="center"
                 justifyItems="center"
                 direction="column"
               >
                 <Grid item>
-                  <TextField
+                  <TextField 
                     name="name"
                     label="Name:"
                     type="text"
@@ -137,7 +137,7 @@ const Form = () => {
                   />
                 </Grid>
               </Grid>
-              <Button type="submit">{id ? "UPDATE" : "CREATE"}</Button>
+              <Button variant='outlined' color='inherit' type="submit">{id ? "UPDATE" : "CREATE"}</Button>
             </form>
           </div>
         )}
@@ -147,7 +147,7 @@ const Form = () => {
           </div>
         )}
       />
-      <Button
+      <Button variant='outlined' color='inherit'
         onClick={() => {
           navigate("/");
         }}
