@@ -11,7 +11,7 @@ interface DrawerProps {
 }
 
 const Drawer = ({ state, onClick }: DrawerProps) => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { setTheme } = useContext(ThemeContext);
   const onDrawerClick = () => {
     onClick(!state);
   };

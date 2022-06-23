@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +9,6 @@ import "./productcard.scss";
 const ProductCard = ({ product }: any) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const role = useSelector((state: any) => state.user.user.role);
   const cart = useSelector((state: any) => state.cart);
 
   return (
@@ -18,6 +17,7 @@ const ProductCard = ({ product }: any) => {
         <img
           className="product-card__left"
           src={product.img}
+          alt={product.name}
           onClick={() => {
             navigate(`/products/${product.id}`);
           }}

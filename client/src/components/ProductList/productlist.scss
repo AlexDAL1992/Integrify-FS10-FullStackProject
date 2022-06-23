@@ -1,11 +1,26 @@
-@import '../../styles/base';
+@import "../../styles/base";
 
 .product-list {
-    margin: auto;
-    padding: 5rem;
+  margin: auto;
+  padding: 5rem;
 
-    &__title{
-        font-size: 2rem;
-        margin-bottom: 3rem;
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    p {
+      margin-right: 1rem;
     }
+  }
+
+  &__pagination {
+    
+    align-items: center;
+    justify-items: end;
+  }
 }

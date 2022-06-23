@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, useContext } from "react";
+import React, { useState, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ShoppingCart, Menu } from "@mui/icons-material";
@@ -8,7 +8,6 @@ import { clientId } from "../../services/login";
 import { handleLoginSuccess } from "../../redux/reducers/user";
 import Cart from "../Cart/Cart";
 import Search from "../Search/Search";
-import { ThemeContext } from "../Context/ThemeContext";
 import "./AppBar.scss";
 
 interface AppBarProps {
